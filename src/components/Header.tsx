@@ -1,3 +1,12 @@
+import { CartItem, Guitar } from "../types"
+
+type HeaderProps = {
+  cart: CartItem[]
+  removeFromCart: (id: Guitar["id"]) => void
+  incrementQuantity: (id: Guitar["id"]) => void
+  decrementQuantity: (id: Guitar["id"]) => void
+  cleanCart: () => void
+}
 
 const Header = (
   {
@@ -6,7 +15,7 @@ const Header = (
     incrementQuantity,
     decrementQuantity,
     cleanCart
-  }) => {
+  } : HeaderProps) => {
 
   const totalPaid = cart.reduce((total, item) => (
     total + (item.price * item.quantity)
