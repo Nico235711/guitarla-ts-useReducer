@@ -1,7 +1,14 @@
+type Guitar = {
+  id: number
+  name: string
+  image: string
+  description: string
+  price: number
+}
 
-const Guitar = ({ guitar, addToCart }) => {
+const Guitar = ({ guitar, addToCart } : { guitar: Guitar, addToCart: (item: Guitar) => void }) => {
 
-  const { price, name, image, description, id } = guitar
+  const { price, name, image, description } = guitar
 
   return (
     <div className="col-md-6 col-lg-4 my-4 row align-items-center">
