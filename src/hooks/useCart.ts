@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { db } from "../data/db";
+import type { CartItem } from '../types/index'
 
 export const useCart = () => {
-  const initialCart = JSON.parse(localStorage.getItem("cart")) ?? []
+  
+  const initialCart = () : CartItem[] => {
+    const localStorageCart = localStorage.getItem("cart")
+    return localStorageCart ? JSON.parse(localStorageCart) : []
+  } 
 
   // state
   const [data] = useState(db)

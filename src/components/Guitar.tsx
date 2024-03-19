@@ -1,4 +1,4 @@
-import type { Guitar } from '../types/index'
+import type { Guitar } from '../types'
 
 type GuitarProps = {
   guitar: Guitar, 
