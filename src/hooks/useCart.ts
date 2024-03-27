@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { db } from "../data/db";
 import type { CartItem, Guitar } from '../types/index'
 
 export const useCart = () => {
@@ -10,7 +9,6 @@ export const useCart = () => {
   } 
 
   // state
-  const [data] = useState(db)
   const [cart, setCart] = useState(initialCart)
 
   useEffect(() => {
@@ -72,7 +70,6 @@ export const useCart = () => {
   }
 
   return {
-    data,
     cart,
     addToCart,
     removeFromCart,
