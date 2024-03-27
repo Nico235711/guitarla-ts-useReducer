@@ -1,8 +1,10 @@
+import { Dispatch } from "react"
 import { CartItem, Guitar } from "../types"
+import { CartActions } from "../reducers/cart-reducer"
 
 type HeaderProps = {
   cart: CartItem[]
-  removeFromCart: (id: Guitar["id"]) => void
+  dispatch: Dispatch<CartActions>
   incrementQuantity: (id: Guitar["id"]) => void
   decrementQuantity: (id: Guitar["id"]) => void
   cleanCart: () => void
@@ -11,11 +13,11 @@ type HeaderProps = {
 const Header = (
   {
     cart,
-    removeFromCart,
+    dispatch,
     incrementQuantity,
     decrementQuantity,
     cleanCart
-  } : HeaderProps) => {
+  }: HeaderProps) => {
 
   const totalPaid = cart.reduce((total, item) => (
     total + (item.price * item.quantity)
@@ -82,7 +84,10 @@ const Header = (
                                   <button
                                     className="btn btn-danger"
                                     type="button"
-                                    onClick={() => removeFromCart(guitar.id)}
+                                    onClick={() => dispatch({
+                                      type: "remove-from-cart", 
+                                      payload: { id: guitar.id }
+                                    })}
                                   >
                                     X
                                   </button>

@@ -4,9 +4,9 @@ import { CartItem, Guitar } from "../types"
 // acciones quee describen que esta pasando en la app
 export type CartActions = 
   { type: "add-to-cart", payload: { item: Guitar } } |
-  { type: "remove-from-cart", payload: { item: Guitar["id"] } } |
-  { type: "increase-quantity", payload: { item: Guitar["id"] } } |
-  { type: "decrease-quantity", payload: { item: Guitar["id"] } } |
+  { type: "remove-from-cart", payload: { id: Guitar["id"] } } |
+  { type: "increase-quantity", payload: { id: Guitar["id"] } } |
+  { type: "decrease-quantity", payload: { id: Guitar["id"] } } |
   { type: "clean-cart" } 
 
 export type CartState = {
@@ -55,6 +55,7 @@ export const cartReducer = (
         const newItem : CartItem = {...action.payload.item, quantity: 1}
         updatedCart = [...state.cart, newItem]
       }
+      
       return {
         ...state,
         cart: updatedCart
@@ -62,8 +63,11 @@ export const cartReducer = (
     }
 
     if (action.type === "remove-from-cart") {
+      const updatedCart = state.cart.filter(guitar => guitar.id !== action.payload.id)
+
       return {
-        ...state
+        ...state,
+        cart: updatedCart
       }
     }
 

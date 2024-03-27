@@ -7,7 +7,6 @@ import { cartReducer, initialState } from "./reducers/cart-reducer";
 function App() {
 
   const {
-    removeFromCart,
     incrementQuantity,
     decrementQuantity,
     cleanCart
@@ -19,7 +18,7 @@ function App() {
     <>
       <Header
         cart={state.cart}
-        removeFromCart={removeFromCart}
+        dispatch={dispatch}
         incrementQuantity={incrementQuantity}
         decrementQuantity={decrementQuantity}
         cleanCart={cleanCart}
