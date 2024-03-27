@@ -1,71 +1,57 @@
-import { Guitar } from "../types"
+import { db } from "../data/db"
+import { CartItem, Guitar } from "../types"
 
 // acciones quee describen que esta pasando en la app
 export type CartActions = 
   { type: "add-to-cart", payload: { item: Guitar } } |
   { type: "remove-from-cart", payload: { item: Guitar["id"] } } |
-  { type: "increment-quantity", payload: { item: Guitar["id"] } } |
-  { type: "decrement-quantity", payload: { item: Guitar["id"] } } |
+  { type: "increase-quantity", payload: { item: Guitar["id"] } } |
+  { type: "decrease-quantity", payload: { item: Guitar["id"] } } |
   { type: "clean-cart" } 
 
-export type ActivityState = {
-
+export type CartState = {
+  data: Guitar[]
+  cart: CartItem[]
 }
 
 // state inicial
-const localStorageActivities = () => {
+export const initialState : CartState = {
+  data: db,
+  cart: []
 }
 
-export const initialState = {
-}
-
-// nuestro reducer
-export const activityReducer = (
-    state: ActivityState = initialState,
-    action: ActivityActions
+// reducer
+export const cartReducer = (
+    state: CartState = initialState,
+    action: CartActions
   ) => {
-    if (action.type === "save-activity") {
-
-      let updatedActivities : Activity[] = []
-      // este código maneja la lógica para actualizar el state
-      if (state.activeId) { // editando registro
-        updatedActivities = state.activities.map(activity => activity.id === state.activeId ? action.payload.newActivity : activity)
-
-      } else { // nuevo registro
-        updatedActivities = [...state.activities, action.payload.newActivity]
-      }
-
-      // retorno del estado actualizado
+    if (action.type === "add-to-cart") {
       return {
-        ...state,
-        activities: updatedActivities,
-        activeId: ""
+        ...state
       }
     }
 
-    if (action.type === "set-activeId") {
+    if (action.type === "remove-from-cart") {
       return {
-        ...state,
-        activeId: action.payload.id
+        ...state
       }
     }
 
-    if (action.type === "remove-activity") {
-
-      // retorno del estado actualizado
+    if (action.type === "increase-quantity") {
       return {
-        ...state,
-        activities: state.activities.filter(stateActivity => stateActivity.id !== action.payload.id)
+        ...state
       }
     }
 
-    if (action.type === "restart-app") {
-      const response = confirm("¿Desea resetear la app?")
-      if (response) {
-        return {
-          activities: [],
-          activeId: ""
-        }
+    if (action.type === "decrease-quantity") {
+      return {
+        ...state
+      }
+    }
+
+    if (action.type === "clean-cart") {
+      return {
+        ...state
       }
     }
 

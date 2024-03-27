@@ -1,6 +1,8 @@
+import { useReducer } from "react";
 import Guitar from "./components/Guitar"
 import Header from "./components/Header"
 import { useCart } from "./hooks/useCart";
+import { cartReducer, initialState } from "./reducers/cart-reducer";
 
 function App() {
 
@@ -13,6 +15,10 @@ function App() {
     decrementQuantity,
     cleanCart
   } = useCart()
+
+  const [state, dispatch] = useReducer(cartReducer, initialState)
+  console.log(state);
+  
 
   return (
     <>
