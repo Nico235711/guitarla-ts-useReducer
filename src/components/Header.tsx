@@ -5,8 +5,6 @@ import { CartActions } from "../reducers/cart-reducer"
 type HeaderProps = {
   cart: CartItem[]
   dispatch: Dispatch<CartActions>
-  incrementQuantity: (id: Guitar["id"]) => void
-  decrementQuantity: (id: Guitar["id"]) => void
   cleanCart: () => void
 }
 
@@ -14,8 +12,6 @@ const Header = (
   {
     cart,
     dispatch,
-    incrementQuantity,
-    decrementQuantity,
     cleanCart
   }: HeaderProps) => {
 
@@ -67,7 +63,10 @@ const Header = (
                                   <button
                                     type="button"
                                     className="btn btn-dark"
-                                    onClick={() => decrementQuantity(guitar.id)}
+                                    onClick={() => dispatch({
+                                      type: "decrease-quantity",
+                                      payload: { id: guitar.id }
+                                    })}
                                   >
                                     -
                                   </button>
@@ -75,7 +74,10 @@ const Header = (
                                   <button
                                     type="button"
                                     className="btn btn-dark"
-                                    onClick={() => incrementQuantity(guitar.id)}
+                                    onClick={() => dispatch({
+                                      type: "increase-quantity",
+                                      payload: { id: guitar.id }
+                                    })}
                                   >
                                     +
                                   </button>

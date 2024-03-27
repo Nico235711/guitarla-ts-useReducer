@@ -55,7 +55,7 @@ export const cartReducer = (
         const newItem : CartItem = {...action.payload.item, quantity: 1}
         updatedCart = [...state.cart, newItem]
       }
-      
+
       return {
         ...state,
         cart: updatedCart
@@ -72,14 +72,37 @@ export const cartReducer = (
     }
 
     if (action.type === "increase-quantity") {
+      const updatedCart = state.cart.map(guitar => {
+        if (guitar.id === action.payload.id && guitar.quantity < maxItems) {
+          return {
+            ...guitar,
+            quantity: guitar.quantity + 1 // toma una copia y aumenta la cantidad
+          }
+        }
+        return guitar
+      })
+      
       return {
-        ...state
+        ...state,
+        cart: updatedCart
       }
     }
 
     if (action.type === "decrease-quantity") {
+
+      const updatedCart = state.cart.map(guitar => {
+        if (guitar.id === action.payload.id && guitar.quantity > minItems) {
+          return {
+            ...guitar,
+            quantity: guitar.quantity - 1 // toma una copia y decrementa la cantidad
+          }
+        }
+        return guitar
+      })
+
       return {
-        ...state
+        ...state,
+        cart: updatedCart
       }
     }
 
