@@ -14,10 +14,14 @@ export type CartState = {
   cart: CartItem[]
 }
 
+const localStorageCart = () : CartItem[] => {
+  const localStorageCart = localStorage.getItem("cart")
+  return localStorageCart ? JSON.parse(localStorageCart) : []
+}
 // state inicial
 export const initialState : CartState = {
   data: db,
-  cart: []
+  cart: localStorageCart()
 }
 
 const maxItems = 5
