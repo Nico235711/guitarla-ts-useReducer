@@ -1,5 +1,5 @@
 import { Dispatch } from "react"
-import { CartItem, Guitar } from "../types"
+import { CartItem } from "../types"
 import { CartActions } from "../reducers/cart-reducer"
 
 type HeaderProps = {
