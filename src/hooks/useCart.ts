@@ -15,12 +15,7 @@ export const useCart = () => {
     localStorage.setItem("cart", JSON.stringify(cart))
   }, [cart]);
 
-  function cleanCart() {
-    setCart([])
-  }
-
   return {
     cart,
-    cleanCart
   }
 }

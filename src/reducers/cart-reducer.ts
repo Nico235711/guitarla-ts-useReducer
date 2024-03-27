@@ -108,7 +108,8 @@ export const cartReducer = (
 
     if (action.type === "clean-cart") {
       return {
-        ...state
+        ...state,
+        cart: []
       }
     }
 

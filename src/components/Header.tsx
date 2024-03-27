@@ -5,15 +5,9 @@ import { CartActions } from "../reducers/cart-reducer"
 type HeaderProps = {
   cart: CartItem[]
   dispatch: Dispatch<CartActions>
-  cleanCart: () => void
 }
 
-const Header = (
-  {
-    cart,
-    dispatch,
-    cleanCart
-  }: HeaderProps) => {
+const Header = ({ cart, dispatch }: HeaderProps) => {
 
   const totalPaid = cart.reduce((total, item) => (
     total + (item.price * item.quantity)
@@ -100,7 +94,7 @@ const Header = (
                         </tbody>
                       </table>
                       <p className="text-end">Total pagar: <span className="fw-bold">${totalPaid}</span></p>
-                      <button className="btn btn-dark w-100 mt-3 p-2" onClick={() => cleanCart()}>Vaciar Carrito</button>
+                      <button className="btn btn-dark w-100 mt-3 p-2" onClick={() => dispatch({ type: "clean-cart" })}>Vaciar Carrito</button>
                     </>
                   ) : (
                     <p className="text-center">El carrito esta vacio</p>
