@@ -8,7 +8,6 @@ function App() {
 
   const {
     cart,
-    addToCart,
     removeFromCart,
     incrementQuantity,
     decrementQuantity,
